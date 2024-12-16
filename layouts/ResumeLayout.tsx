@@ -25,7 +25,7 @@ function ResumeLayout({ children, toc }: LayoutProps) {
               Cirriculum Vitae
             </h1>
             <p className="text-base text-gray-500 dark:text-gray-400 md:text-lg md:leading-7">
-              An overview of my education, career, skills, and publications.
+              An overview of my education, career, and skills.
             </p>
           </header>
           <div className="border border-t border-gray-200 dark:border-gray-700" />
