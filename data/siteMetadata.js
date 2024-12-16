@@ -1,10 +1,10 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'UA SDS GIDP Blog',
-  author: 'Wilbur T. Wildcat',
-  headerTitle: 'Wilbur T. Wildcat Blog',
+  title: 'Matthew Wallace Blog',
+  author: 'Matthew Wallace',
+  headerTitle: 'Matthew Wallace Blog',
   description:
-    'A blog portfolio template for University of Arizona Statistics and Data Science GIDP Students',
+    'A blog portfolio for my latest projects, CV, and blog posts',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
@@ -12,13 +12,13 @@ const siteMetadata = {
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
   mastodon: 'https://mastodon.social/@mastodonuser',
-  email: 'address@yoursite.com',
+  email: 'wallacematthewdavid@gmail.com',
   github: 'https://github.com/wallacematthewdavid',
   x: 'https://twitter.com/x',
   // twitter: 'https://twitter.com/Twitter',
   facebook: 'https://facebook.com',
   youtube: 'https://youtube.com',
-  linkedin: 'https://www.linkedin.com',
+  linkedin: 'https://www.linkedin.com/in/matthewdavidwallace/',
   threads: 'https://www.threads.net',
   instagram: 'https://www.instagram.com',
   locale: 'en-US',

@@ -11,6 +11,5 @@ export const components: MDXComponents = {
   TOCInline,
   a: CustomLink,
   pre: Pre,
-  table: TableWrapper,
-  BlogNewsletterForm,
+  table: TableWrapper
 }
