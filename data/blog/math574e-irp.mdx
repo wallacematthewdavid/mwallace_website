@@ -1,0 +1,73 @@
+---
+title: Accessing and Using Bathymetric Data (with marmap)
+date: '2024-10-21'
+tags: ['project', 'school', 'statistics']
+draft: false
+summary: 'A introduction into the functionality of the marmap package in R to access and plot bathymetric data.'
+---
+
+There are a lot of useful R packages that exist for obtaining data and I want to showcase the marmap function for loading in and working with bathymetric data. For those unfamiliar, bathymetric data refers to data on the depth and shape of underwater terain from any body of water. National Centers for Environmental Information (<a href="https://www.ncei.noaa.gov/maps/bathymetry/">NOAA</a>) has publicly available bathymetric of the entire worldm, which we can access using their website directly.
+
+<div className="-mx-2 flex flex-wrap">
+  <div className="my-1 w-full overflow-hidden">
+    ![NOAA Landing Page](/static/images/math574e-irp/NOAA.png)
+  </div>
+</div>
+
+Alternatively, we could very easily pull this same data from the `getNOAA.bathy` function from the marmap R package directly into R.
+
+```r
+library(marmap)
+# Define bounds for bathymetric data
+gulf.lon1 = -70
+gulf.lon2 = -110
+gulf.lat1 = 35
+gulf.lat2 = 15
+gulf.bathy <- getNOAA.bathy(gulf.lon1, gulf.lon2, gulf.lat1, gulf.lat2,
+                            resolution=10)
+plot.bathy(gulf.bathy)
+```
+
+<div className="-mx-2 flex flex-wrap">
+  <div className="my-1 w-full overflow-hidden">
+    ![Base NOAA Plot](/static/images/math574e-irp/base_NOAA_plot.png)
+  </div>
+</div>
+
+This plot is quite lacking and there is a lot we can do with these with not much effort. Setting `image` and `land` to True and adding `scaleBathy` colors our land and water in out plot and provides a scale for the size of the map.
+
+```{r}
+plot.bathy(gulf.bathy, 
+     image=T, 
+     land=T, 
+     axes=F,)
+axis(1, at=seq(gulf.lon1, gulf.lon2, by = -5))
+axis(2, at=seq(gulf.lat1, gulf.lat2, by = -5))
+scaleBathy(gulf.bathy,deg=4.28,x=-95,y=33)
+```
+
+<div className="-mx-2 flex flex-wrap">
+  <div className="my-1 w-full overflow-hidden">
+    ![NOAA Plot 2](/static/images/math574e-irp/NOAA_plot2.png)
+  </div>
+</div>
+
+These colors that we gave to the land and water are completely customizeable, however. Though, the way we must chose these colors can be a bit confusing.
+
+```{r}
+land <- c(grey(0.7),grey(0.9),grey(1))
+water <- c("red","orange","yellow")
+plot.bathy(gulf.bathy, 
+     image=T, 
+     land=T, 
+     axes=F,
+     bpal=list(c(0,max(gulf.bathy),land), c(min(gulf.bathy),0,water)))
+axis(1, at=seq(gulf.lon1, gulf.lon2, by = -5))
+axis(2, at=seq(gulf.lat1, gulf.lat2, by = -5))
+scaleBathy(gulf.bathy,deg=4.28,x=-95,y=33)
+```
+<div className="-mx-2 flex flex-wrap">
+  <div className="my-1 w-full overflow-hidden">
+    ![NOAA Plot 3](/static/images/math574e-irp/NOAA_plot3.png)
+  </div>
+</div>
