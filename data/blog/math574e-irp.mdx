@@ -3,10 +3,14 @@ title: Accessing and Using Bathymetric Data (with marmap)
 date: '2024-10-21'
 tags: ['project', 'school', 'statistics']
 draft: false
-summary: 'A introduction into the functionality of the marmap package in R to access and plot bathymetric data.'
+summary: 'An introduction into the functionality of the marmap package in R to access and plot bathymetric data.'
 ---
 
-There are a lot of useful R packages that exist for obtaining data and I want to showcase the marmap function for loading in and working with bathymetric data. For those unfamiliar, bathymetric data refers to data on the depth and shape of underwater terain from any body of water. National Centers for Environmental Information (<a href="https://www.ncei.noaa.gov/maps/bathymetry/">NOAA</a>) has publicly available bathymetric of the entire worldm, which we can access using their website directly.
+There are a lot of useful R packages that exist for obtaining data and I want to showcase the marmap function for loading in and working with bathymetric data. For those unfamiliar, bathymetric data refers to data on the depth and shape of underwater terain from any body of water. National Centers for Environmental Information (<a href="https://www.ncei.noaa.gov/maps/bathymetry/">NOAA</a>) has publicly available bathymetric of the entire world, which we can access using their website directly.
+
+## Plotting
+
+### Base R
 
 <div className="-mx-2 flex flex-wrap">
   <div className="my-1 w-full overflow-hidden">
@@ -30,7 +34,7 @@ plot.bathy(gulf.bathy)
 
 <div className="-mx-2 flex flex-wrap">
   <div className="my-1 w-full overflow-hidden">
-    ![Base NOAA Plot](/static/images/math574e-irp/base_NOAA_plot.png)
+    ![Base NOAA Plot](/static/images/math574e-irp/NOAA_plot1.png)
   </div>
 </div>
 
@@ -71,3 +75,54 @@ scaleBathy(gulf.bathy,deg=4.28,x=-95,y=33)
     ![NOAA Plot 3](/static/images/math574e-irp/NOAA_plot3.png)
   </div>
 </div>
+
+### GGPlot
+
+These plots so far have been using base R for the plots, but there is also integration with ggplot from this package through the `autoplot.bathy` function.
+
+```{r}
+autoplot.bathy(gulf.bathy)
+```
+
+<div className="my-1 w-full overflow-hidden">
+![NOAA GGPlot 1](/static/images/math574e-irp/NOAA_ggplot1.png)
+</div>
+
+There is a lot of customization that can be done with these autoplots, but I will just showcase a very simple function, `scale_fill_etopo`, which very simply makes the entire plot look very easy to read with a color palette that we are used to see for maps of the world.
+
+```{r}
+autoplot.bathy(gulf.bathy, geom=c("r","c")) + 
+  scale_fill_etopo(name="Depth (m)") +
+  xlab("Longitude") + 
+  ylab("Latitude")
+```
+
+<div className="my-1 w-full overflow-hidden">
+![NOAA GGPlot 2](/static/images/math574e-irp/NOAA_ggplot2.png)
+</div>
+
+## Transects
+
+The last thing I would like to showcase with this blog post is the ability to get transects of the water using different points. I could pick any two points and the line between them, like what's shown below.
+
+<div className="my-1 w-full overflow-hidden">
+![NOAA Plot 4](/static/images/math574e-irp/NOAA_plot4.png)
+</div>
+
+Using this package, the `get.transect` function gets the data for the transect and a simple `plot` function will plot the transect.
+
+```{r}
+x1 <- -87.13
+y1 <- 21.21
+x2 <- -81.05
+y2 <- 25.32
+
+gulf.tr <- get.transect(gulf.bathy,x1=x1,y1=y1,x2=x2,y2=y2,distance=T)
+plotProfile(gulf.tr)
+```
+
+<div className="my-1 w-full overflow-hidden">
+![NOAA Plot 5](/static/images/math574e-irp/NOAA_plot5.png)
+</div>
+
+There are a lot more applications for this package, but the intention of this blog is to overview what can be done with the package so if these functions would lend value, their existence would be known.
