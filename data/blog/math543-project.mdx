@@ -1,0 +1,145 @@
+---
+title: Signed Graphs
+date: '2024-11-30'
+tags: ['project', 'school', 'statistics']
+draft: false
+summary: 'A dive into signed graphs and related properties'
+---
+
+## Definitions
+
+### Graph Theory
+
+<div style={{marginLeft: "20px"}}>
+<u>Signed Graph</u> - A graph is signed when all edges have a positive or negative sign.
+</div>
+
+<div style={{marginLeft: "20px"}}>
+<u>Balance</u> - A signed graph $S$ is balanced when it can be cut into two vertex sets, $V_1$ and $V_2$, where every edge in the cut-set are negatively signed and every $e_1 \in E(V_1)$ and $e_2 \in E(V_2)$ are positively signed.
+</div>
+
+<div style={{marginLeft: "20px"}}>
+<u>Sign of a Path or a Cycle</u> - The sign of a path or a cycle is equal to the product of all edges' signs in the path or cycle.
+</div>
+
+<div style={{marginLeft: "20px"}}>
+<u>Clusterable</u> - A signed graph $S$ is clusterable if its vertex set can be partitioned into vertex sets, called clusters, so that every edge in the set of edges for each cluster is positive, while every edge that joins two clusters is negative.
+</div>
+
+### Set Theory
+
+<div style={{marginLeft: "20px"}}>
+<u>Relation</u> - A relation $R$ on set $A$ is a subset of $A\times A$. For elements $a$ and $b$, it is said that $a$ is related to $b$ by $R$ if $(a,b)\in R$ and is represented $a\ R\ b$.
+</div>
+
+<div style={{marginLeft: "20px"}}>
+<u>Reflexive</u> - A relation $R$ is reflexive if $a\ R\ a\  \forall\  a\in A$.
+</div>
+
+<div style={{marginLeft: "20px"}}>
+<u>Symmetric</u> - A relation $R$ is symmetric if $a\ R\ b\implies b\ R\ a$.
+</div>
+
+<div style={{marginLeft: "20px"}}>
+<u>Transitive</u> - A relation $R$ is transitive if $a\ R\ b$ and $b\ R\ c\implies a\ R\ c$.
+</div>
+
+<div style={{marginLeft: "20px"}}>
+<u>Equivalence Relation</u> - A relation $R$ is an equivalence relation if $R$ is reflexive, symmetric, and transitive.
+</div>
+
+<div style={{marginLeft: "20px"}}>
+<u>Equivalence Class</u> - An equivalence class $[a]$ on a relation $R$ is the set defined for any $a\in A$ to be $\{x|x\in A, x\ R\ a\}$.
+</div>
+
+### Theorems
+
+<div style={{marginLeft: "20px"}}>
+### Theorem 1
+
+Claim: A signed graph $S$ is balanced if and only if for every two vertices, $v_1, v_2 \in S$, all paths joining them have the same sign.
+
+Proof: We assume our signed graph $S$ is a balanced graph. We show that for every two vertices, $v_1, v_2 \in S$, all paths joining them have the same sign. From the definition of a balanced signed graph, $S$ has the two vertex sets, $V_1$ and $V_2$, where the only negatively signed edges are ones that cross from one vertex set to the other. If $v_1, v_2 \in V_i$ for $i=1,2$ , all paths from $v_1$ to $v_2$ must cross between $V_1$ and $V_2$ an even amount of times, and therefore these paths must be even. As for if $v_1\in V_i, v_2\notin V_i$ for $i=1,2$, then all paths from $v_1$ to $v_2$ must cross an odd amount of times, making them all odd.
+
+Conversely, we assume our graph $S$ has the property that between any two vertices, $v_1, v_2 \in S$, all paths between these two are of the same sign. Now we show that $S$ is balanced. If $S$ is disconnected, then it is sufficient to show that every component is balanced, so we only concern ourselves with the case that $S$ is connected. We construct $V_1$ from a vertex $v$ and all other vertices $x$ such that there is a positive path from $v$ to $x$. $V_2$ will then be the set of all points in $S$ that are not in $V_1$. If we define $u$ and $w$ to be any two vertices that share an edge such that $uw$ exists, we must then show that every $uw$ for $u\in V_1, w\in V_2$ is negative and every $uw$ for $u,w\in V_i$ for $i=1,2$ is positive.
+
+It is simple to see that every edge $uw$ for $u\in V_1, w\in V_2$ is negative as if it were not negative, the path from $v$ to $w$ would be positive from the fact that the path from $v$ to $u$ is positive. In that case, $V_1$ would have been constructed to contain $w$. This contradiction implies that $uw$ must be negative.
+
+To show that every edge $uw$ for $u,w\in V_i,i=1,2$ is positive, we will assume that $uw$ is negative. We first assert that all paths from $v$ to $u$ and all paths from $v$ to $w$ have the same sign. This is stems from how we constructed $V_1$ to contain all vertices that have a positive path from $v$. If $u,w\in V_1$, then the paths from $v$ to $u$ and $v$ to $w$ must be positive and otherwise, if $u,w\in V_2$, these paths are negative. If we take $P$ to be a path that goes from $v$ to $u$, and $P^\prime$ is the path that takes $P$ and then $uw$, then $P$ and $P^\prime$ have opposite signs which contradicts the assertion above that all paths from $v$ to $u$ and from $v$ to $w$ have the same sign, so every edge $uw$ must be positive.
+</div>
+
+<div style={{marginLeft: "20px"}}>
+### Theorem 2
+
+Claim: A signed graph $S$ is balanced if and only if every cycle of $S$ is positive.
+
+Proof: We assume our signed graph $S$ is balanced. Suppose $S$ has a negative signed cycle $C$. For any two unique vertices $u,v\in C$, we could create two edge disjoint paths from $u$ to $v$ where one has an even amount of negative edges and the other a positive amount. Since these two paths have two different signs, but have the same starting and ending vertices, we have a contradiction from Theorem 1. So there cannot be a $C\in S$ that is negatively signed.
+
+Conversely, we assume that every cycle of $S$ is positive. Suppose $S$ is not balanced. By Theorem 1, a signed graph that is not balanced has two vertices $u,v$ and two paths from $u$ to $v$ that have different signs. From $u,v$ and the paths between them, we could create a negative cycle, but this is a contradiction to our supposition. So a signed graph with only positive cycles must be balanced.
+</div>
+
+<div style={{marginLeft: "20px"}}>
+### Theorem 3
+
+Claim: Let $R$ be an equivalence relation on a nonempty set $A$. Then the set $S=\{[a]|a\in A\}$ of equivalence classes is a partition of the set $A$.
+
+Proof: For any element $a\in A$, $a\in [a]$ by the reflexive property so every element $a$ is in one of the sets of $S$.
+
+Now, we show that $[a]\cap[b]=\varnothing\ \forall\ a,b\in A, a\ne b$. If we assume $[a]$ and $[b]$ are not disjoint, then $[a]\cap[b]\ne\varnothing$ and there exists an element $c\in[a]$ and $c\in [b]$. That is, $c\ R\ a$ and $c\ R\ b$. By symmetry, $a\ R\ c$, so by the transitive property, $a\ R\ b$. For any element $x\in [a]$, so that $x\ R\ a$, the transitive property implies that $x\ R\ b$. So any element in $[a]$ is also in $[b]$ so we know $[a]\subseteq[b]$. From symmetry, $b\ R\ a$, so we can see that for any element $y\in[b]$, and therefore $y\ R\ b$, by the transitive property, $y\ R\ a$. This shows that $[b]\subseteq[a]$, which together with $[a]\subseteq[b]$, shows that $[a]=[b]$ which contradicts the assumption that $[a]$ and $[b]$ are disjoint, so $[a]$ and $[b]$ must be disjoint, thus finishing the proof.
+</div>
+
+<div style={{marginLeft: "20px"}}>
+### Theorem 4
+
+Claim: A signed graph $S$ is clusterable if and only if $S$ contains no cycle with exactly one negative edge.
+
+Proof: We assume that our signed graph $S$ is clusterable. If a cycle $C$ contains only vertices from one cluster, then all $e\in E(C)$ are positively signed. If a cycle contains vertices from more than one cluster, at least two $e\in E(C)$ join two clusters together and are therefore negative. In both cases, the cycle does not have exactly one negative edge.
+
+Conversely, we assume $S$ contains no cycle with exactly one negative edge. Let $V$ be the vertex set of $S$ and $u,v\in V$. We define a relation $R$ on the vertex set $V$ such that $(u,v)\in R$ if $u=v$ or if $u$ and $v$ are joined by a path with strictly positive edges. $R$ is then an equivalence relation. Using Theorem 3, the equivalence classes of $R$ form a partition of $V$.
+
+We show that the equivalence classes of $R$ are the clusters of $S$. Let $a_i$ be the $i^{th}$ vertex in $S$. We know that for any $u\in [a_i]$ and $v\in[a_j]$, where $i\ne j$, any edge from $u$ to $v$ must be negative, as if it were positive, then there would be a path from $u$ to $v$ with only positive edges. This would mean that $u$ and $v$ would belong to the same equivalent classes which is a contradiction. Additionally, we know that for any $u,v\in [a_i]$, any edge from $u$ to $v$ must be positive, as if it were not, then by the construction of the equivalent classes, there is a path from $u$ to $v$ with only positive edges and the existence of a negative edge from $u$ to $v$ would create a cycle with only one negative edge, which is a contradiction from our assumption on $S$. This shows that $S$ is clusterable and completes our proof.
+</div>
+
+## Applications
+
+The title of this chapter in the textbook is Graphs and Social Psychology, which reflects the most common application of signed graphs, but this is not the only applicable topic. In this section, we will take a quick look at different areas that signed graphs might be useful in.
+
+<div style={{marginLeft: "20px"}}>
+### Social Psychology
+
+Starting with the suggested application, these graphs can help model relationships between people. We could construct a graph to represent a collection of people where each vertex is a person, and each edge is the relationship between the two people that the edge connects. A positive edge would then indicate a friendly relationship, and a negative edge would be a hostile or poor relationship. Naturally, two people do not necessarily have to have an opinion of each other, namely if they do not even know each other, which can be represented easily by a lack of an edge between them. This said, a regular signed graph would not be able to represent a more complicated relationship between two people like unrequited favor. In this case, from one vertex to another there would be a positive sign, but going back would be negative. In this case, signed digraphs can be leveraged. In these cases, however, the idea of balancing and clustering is not viable.
+
+The reasoning behind choosing the word balanced for balanced signed graphs comes from the idea that a group of people is at the most harmony when a graph of them can be constructed to contain the balanced property. This is not a proven concept, but the idea is that if a group of people can be split into a balanced graph, then there would be two subgroups of people where no conflict would arise between each other and the two subgroups would have no reason to converse with each other as each member in one subgroup lacks favor for anyone in the other subgroup. It is ambitious to claim to be able to find such subgroups that would admit this property, so it is rather claimed that over time, as peoples' opinions other change, they would be able to settle into one group or the other. This claim supports the idea of a two-party system in government, but there is reason to believe that this does not create the most harmony.
+
+Another claim that arises is that people do not necessarily just form two separate groups, but rather clusters, which leads to the idea of clustering a graph. Over time, people's opinions can change and lead them into a subgroup, but in this case, the claim is that there are more possible subgroups. This supports the idea of different social circles. There are different groups of friends in a larger group of people and overtime, people would join a group and only like people from their own group and would not like someone else.
+
+These situations are idealistic for social psychology and easily break down at a larger scale, but given the right conditions, these can be used to model how people favor different people.
+</div>
+
+<div style={{marginLeft: "20px"}}>
+### Natural Language
+
+An example that was not expressed in the book is the idea of grouping words based on their meanings. One could image a graph where each vertex is a word, and each edge is defined by a relationship between the words. A simple relationship using the idea of signs is using synonyms and antonyms to define the edges. A synonym would represent a positive edge, while an antonym would be a negative edge. This could then be used to determine relationships between words and could aid in sentiment analysis.
+
+However, these graphs would not be balanced, but they would often not be clusterable either. A simple example of what would break this property are contronyms. Contronyms are words that have at least two definitions that are antonyms of each other. For example, the verb dust can be used in reference to clean off dust or it can mean laying dust over a surface for reasons such as finding fingerprints. Thus, dust can either mean getting rid of or adding dust. Easily, we can see that the existence of contronyms imposes a cycle of exactly one negative sign, which, according to Theorem 4, makes the graph impossible to cluster. Since language is quite complicated, balance and clusterability would be nearly impossible to come across at a large scale using this construction of a signed graph.
+
+Imagine we added a restriction such that we only include edges that correspond to the most popular synonym and antonym in our given language. In this case, contronyms would no longer be an issue directly as each word can only use one synonym. Even this could fall apart. We could easily imagine that if we construct a path of words where each word added to the path is a synonym of the last, we could end at a word that was an antonym of the original word. In this scenario, we would have another cycle with exactly one negative sign, which would make the graph non-clusterable. The choice of the most common synonyms would help the definitions not wander as much, but with the complexity of language, this problem would likely occur, unless specifically dealt with.
+</div>
+
+## Additional Topics
+
+<div style={{marginLeft: "20px"}}>
+### Correlation Clustering
+
+Even if a signed graph is not clusterable, one could assign different clusters to each vertex and come up with a penalty system to determine the quality of the clusters. Minimizing the penalty would then result in an optimal pseudo-cluster set that allow us to partition our signed graph. Different penalty methods could be employed, but a useful method is to add one to the penalty for every negative edge between vertices in the same cluster and for every positive edge between vertices in different clusters. This essentially allows clusters to be made with some error so that the vertices in the graph can be sorted into groups of similarities.
+
+In doing this, we circumvent the need for our graph to be clusterable at the cost of some accuracy in our partition. For the natural language example above, we recall that our signed graph will fail to be clusterable if there exists a path of synonyms where the two words at the ends of the path are antonyms of each other. If we are willing to pay the price of representing every antonym pair like this in the language as synonymous, then we can make a pseudo-clustering of our graph to group words into likeness. Once defined, these clusters could be used to give insight into semantic meaning between words.
+</div>
+
+<div style={{marginLeft: "20px"}}>
+### Switching
+
+Switching in signed graphs is a mathematical operation that allows us to modify the signs of edges in the graph. That is that we select a vertex in our graph and flip the signs of all the incident edges. This operation can be extended over to a vertex set as well where we flip the sign of all the incident edges of every vertex in the set. If an edge is incident to two vertices inside the vertex set, then the edge's sign will be switched twice resulting in the original sign. Due to this, we can instead think of a switching on a vertex set to only change the sign of all edges incident to both an edge in the vertex set and an edge outside of the vertex set.
+
+Using switches, we come to the theorem which claims that a signed graph is balanced if and only if using just switches, a signed graph with only positively signed edges can be obtained. This is quite simple to see. A balanced sign graph has two disjoint vertex sets where each edge within sets is positively signed and edges between sets are negatively signed. Given a balanced signed graph, a switching on one of the vertex sets that defines the balanced graph would directly switch all of the negative signed edges that are incident to the edge set and no other edges. This conveniently yields a graph with only positively signed edges. Conversely, given a graph with strictly positively signed edges, a switching on any vertex set would make every edge incident to two vertices in the vertex set remain positive, every edge incident to one vertex in the vertex set change to a negative sign, and every edge that is not incident to a vertex in the vertex set remains positive. This then divides the graph into two vertex sets: the one in which the switching operation was applied and the set of all remaining vertices not in the first vertex set. Since every edge incident to vertices in the same vertex sets are strictly positively signed and the edges incident to vertices in different vertex sets are negatively signed, we have created a balanced signed graph from an entirely positively signed graph using only switches.
+</div>
