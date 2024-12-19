@@ -7,20 +7,22 @@ interface Project {
 
 const projectsData: Project[] = [
   {
-    title: 'A Search Engine',
-    description: `What if you could look up any information in the world? Webpages, images, videos
-    and more. Google has many features to help you find exactly what you're looking
-    for.`,
-    imgSrc: '/static/images/google.png',
-    href: 'https://www.google.com',
+    title: 'Spatial Statistical Modeling of Wildfire Incidence in Arizona',
+    description: `Predicting location and severity of wildfires using spatial statistics.`,
+    imgSrc: '/static/images/math574e-project/coco_wf_intensity_grid.png',
+    href: '/blog/math574e-project',
   },
   {
-    title: 'The Time Machine',
-    description: `Imagine being able to travel back in time or to the future. Simple turn the knob
-    to the desired date and press "Go". No more worrying about lost keys or
-    forgotten headphones with this simple yet affordable solution.`,
-    imgSrc: '/static/images/time-machine.jpg',
-    href: '/blog/the-time-machine',
+    title: 'Accessing and Using Bathymetric Data',
+    description: `An introduction into the functionality of the marmap package in R to access and plot bathymetric data.`,
+    imgSrc: '/static/images/math574e-irp/NOAA_ggplot2.png',
+    href: '/blog/math574e-irp',
+  },
+  {
+    title: 'Signed Graphs',
+    description: `A dive into signed graphs and related properties`,
+    imgSrc: '/static/images/math543-project/graph_bg.webp',
+    href: '/blog/math543-project',
   },
 ]
 
